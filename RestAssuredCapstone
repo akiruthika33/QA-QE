@@ -1,0 +1,143 @@
+API Automation Capstone Project
+1) Project Setup
+Create project environment and declare all necessary variables with corresponding values.
+
+2) GET – Retrieve All Objects
+Endpoint: https://api.restful-api.dev/objects
+
+Positive Test Scenario
+
+Print all object details with names containing the word "Apple" on Rest Assured console.
+
+Assertions:
+
+HTTP response status code = 200
+
+Print object details (id & name) containing "Apple"
+
+3) GET – Query Parameters
+Endpoint: https://api.restful-api.dev/objects?id=3&id=5&id=10
+
+Positive Test Scenario
+
+Retrieve object details based on ids passed as query params (?id=3&id=5&id=10).
+
+Assertions:
+
+HTTP response status code = 200
+
+Response body should contain all object ids and names for 3, 5, 10
+
+4) GET – Path Parameter
+Endpoint: https://api.restful-api.dev/objects/:id
+
+Negative Test Scenario
+
+Request object details for invalid id (7555).
+
+Assertions:
+
+HTTP response status code = 404
+
+Response body should contain error message:
+
+json
+{ "error": "Object with id = 7555 was not found." }
+Positive Test Scenario
+
+Request object details for valid id (7).
+
+Assertions:
+
+HTTP response status code = 200
+
+Response body should contain object detail:
+
+json
+{
+  "id": "7",
+  "name": "Apple MacBook Pro 16",
+  "data": {
+    "year": 2019,
+    "price": 1849.99,
+    "CPU model": "Intel Core i9",
+    "Hard disk size": "1 TB"
+  }
+}
+5) POST – Create Object
+Endpoint: https://api.restful-api.dev/objects
+
+Positive Test Scenario
+
+Add object details using appropriate JSON payload.
+
+Assertions:
+
+HTTP response status code = 200
+
+Response body should contain added object detail with fields:
+
+id
+
+name
+
+createdAt timestamp
+
+6) PATCH – Update Object
+Endpoint: https://api.restful-api.dev/objects/:id
+
+Negative Test Scenario
+
+Update object details for invalid id (random value).
+
+Assertions:
+
+HTTP response status code = 404
+
+Response body should contain error message:
+
+json
+{ "error": "No object with id = 7566 doesn't exist." }
+Positive Test Scenario
+
+Update object details for valid id (generated in POST request).
+
+Assertions:
+
+HTTP response status code = 200
+
+Response body should contain updated object detail with fields:
+
+id
+
+name
+
+updatedAt timestamp
+
+7) DELETE – Remove Object
+Endpoint: https://api.restful-api.dev/objects/:id
+
+Negative Test Scenario
+
+Delete object details for invalid id (444).
+
+Assertions:
+
+HTTP response status code = 404
+
+Response body should contain error message:
+
+json
+{ "error": "No object with id = 444 doesn't exist." }
+Positive Test Scenario
+
+Delete object details for valid id (generated in POST request).
+
+Assertions:
+
+HTTP response status code = 200
+
+Response body should contain success message:
+
+json
+{ "message": "Object with id = 1234 has been deleted." }
